@@ -1,4 +1,4 @@
-// generated on 2018-05-07 using generator-chrome-extension 0.7.1
+// generated on 2018-05-08 using generator-chrome-extension 0.7.1
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import del from 'del';
@@ -124,7 +124,7 @@ gulp.task('wiredep', () => {
 gulp.task('package', function () {
   var manifest = require('./dist/manifest.json');
   return gulp.src('dist/**')
-      .pipe($.zip('Authenticated_Authorship_Chrome_Extension_V2-' + manifest.version + '.zip'))
+      .pipe($.zip('test-' + manifest.version + '.zip'))
       .pipe(gulp.dest('package'));
 });
 
