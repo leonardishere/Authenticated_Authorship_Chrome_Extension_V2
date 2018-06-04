@@ -67,8 +67,6 @@ function verifyText(postText, bundle, cb) {
   var trimmedPost = postText.trim();
   var messageIndex = trimmedPost.indexOf("-----Begin Authenticated Authorship Message-----");
   if (messageIndex === -1) {
-
-    //console.log("Verifying HTML messages is not yet currently supported. If that is what you are trying to do, then please wait for a developer to get busy :)");
     return "The text doesn't contain a valid signature. Try again.";
   }
 
@@ -76,8 +74,6 @@ function verifyText(postText, bundle, cb) {
   var endIndex = trimmedPost.lastIndexOf("-----End Authenticated Authorship Message-----");
 
   if (startIndex === -1 || endIndex === -1 || startIndex > endIndex) {
-
-    //console.log("Verifying HTML messages is not yet currently supported. If that is what you are trying to do, then please wait for a developer to get busy :)");
     return "The text doesn't contain a valid Authenticated Authorship Message. Try again.";
   }
 
@@ -88,8 +84,6 @@ function verifyText(postText, bundle, cb) {
 
   var metaIndex = signedArticle.lastIndexOf("Author:");
   if (metaIndex === -1) {
-
-    //console.log("Verifying HTML messages is not yet currently supported. If that is what you are trying to do, then please wait for a developer to get busy :)");
     return "The text is missing metadata. Try again.";
   }
 
@@ -103,14 +97,10 @@ function verifyText(postText, bundle, cb) {
   var versionIndex = metaData.lastIndexOf("Version:");
 
   if (authorIndex === -1 || signatureIndex === -1 || hashIndex === -1 || versionIndex === -1) {
-
-    //console.log("Verifying HTML messages is not yet currently supported. If that is what you are trying to do, then please wait for a developer to get busy :)");
     return "The text is missing metadata. Try again.";
   }
   /*could add more intelligent parsing, but this will work*/
   if (authorIndex > signatureIndex || signatureIndex > hashIndex || hashIndex > versionIndex) {
-
-    //console.log("Verifying HTML messages is not yet currently supported. If that is what you are trying to do, then please wait for a developer to get busy :)");
     return "The metadata has been altered. Try again.";
   }
 
@@ -124,8 +114,6 @@ function verifyText(postText, bundle, cb) {
   var version = metaData.substring(versionIndex).trim();
 
   if (!author || !signature || !hash || !version) {
-
-    //console.log("Verifying HTML messages is not yet currently supported. If that is what you are trying to do, then please wait for a developer to get busy :)");
     return "The text is missing metadata. Try again.";
   }
 
@@ -158,36 +146,17 @@ function verifyText(postText, bundle, cb) {
             if (newHash !== originalHashedArticle) {
               console.log("Signature created by " + author + " but article was edited.");
               var unverifiedArticle = prefix + "<br/>-----Begin Authenticated Authorship Message-----<br/>" + article + "<br/><br/>" + "Signature was created by: " + author + "<br/>" + "But the article was altered.<br/>" + "-----End Authenticated Authorship Message-----<br/>" + suffix;
-			  cb(unverifiedArticle, false, author, "Signature created by " + author + " but article was edited.", article, bundle);
-              /*let editor = atom.workspace.getActiveTextEditor();
-              if(editor) {
-                editor.setText(unverifiedArticle);
-              }else{
-                atom.notifications("Editor could not be read. Try again.");
-              }*/
+			        cb(unverifiedArticle, false, author, "Signature created by " + author + " but article was edited.", article, bundle);
             } else if (originalHashedArticle !== hash) {
-              //console.log("Signature created by " + author.name + " but article was edited.");
               console.log("Signature created by " + author + " but hash was edited.");
               var unverifiedArticle = prefix + "<br/>-----Begin Authenticated Authorship Message-----<br/>" + article + "<br/><br/>" + "Signature was created by: " + author + "<br/>" + "But the hash was altered.<br/>" + "-----End Authenticated Authorship Message-----<br/>" + suffix;
-			  cb(unverifiedArticle, false, author, "Signature created by " + author + " but hash was edited.", article, bundle);
-              /*let editor = atom.workspace.getActiveTextEditor();
-              if(editor) {
-                editor.setText(unverifiedArticle);
-              }else{
-                atom.notifications("Editor could not be read. Try again.");
-              }*/
+			        cb(unverifiedArticle, false, author, "Signature created by " + author + " but hash was edited.", article, bundle);
             } else {
               console.log("Verified Article!");
 
               var verifiedArticle = prefix + "<br/>-----Begin Authenticated Authorship Message-----<br/>" + article + "<br/><br/>" + "Article was signed by: " + author + "<br/>" + "-----End Authenticated Authorship Message-----<br/>" + suffix;
-			  cb(verifiedArticle, true, author, "Article Verified",  article, bundle);
-              /*let editor = atom.workspace.getActiveTextEditor();
-                       if(editor) {
-                         editor.setText(verifiedArticle);
-                       }else{
-                         atom.notifications("Editor could not be read. Try again.");
-                       }*/
-            // }
+			        cb(verifiedArticle, true, author, "Article Verified",  article, bundle);
+            }
           }
         });
       });
