@@ -14,12 +14,12 @@
     ]
   },
   "permissions": [
-    "tabs", "*://*.facebook.com/*"
+    "tabs", "*"
   ],
   "content_scripts": [
     {
       "matches": [
-        "*://*.facebook.com/*"
+        "*"
       ],
       "js": [
         "scripts/output.js"
