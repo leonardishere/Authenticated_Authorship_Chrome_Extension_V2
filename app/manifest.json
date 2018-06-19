@@ -14,12 +14,12 @@
     ]
   },
   "permissions": [
-    "tabs", "*"
+    "tabs", "*://*.*.*/*"
   ],
   "content_scripts": [
     {
       "matches": [
-        "*"
+        "*://*.*.*/*"
       ],
       "js": [
         "scripts/output.js"
