@@ -14,12 +14,12 @@
     ]
   },
   "permissions": [
-    "tabs", "http://*/*", "https://*/*"
+    "tabs", "http://*/*", "https://*/*", "file:///*/*"
   ],
   "content_scripts": [
     {
       "matches": [
-        "http://*/*", "https://*/*"
+        "http://*/*", "https://*/*", "file:///*/*"
       ],
       "js": [
         "scripts/output.js"

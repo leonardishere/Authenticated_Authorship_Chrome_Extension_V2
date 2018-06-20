@@ -480,9 +480,11 @@ window.setInterval(function(){
 
   //console.log("parse tree");
   treeParse();
-
+  
   //console.log("verify html elements");
   verifyHtmlElements();
+
+
 }, 1000);
 
 
